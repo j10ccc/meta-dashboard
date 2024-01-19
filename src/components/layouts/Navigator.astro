@@ -1,0 +1,54 @@
+---
+const { title } = Astro.props;
+
+const routes = [
+  {
+    title: "Overview",
+    path: `${import.meta.env.BASE_URL}/overview`,
+    icon: "i-fluent-mdl2-view-dashboard"
+  },
+  {
+    title: "Proxies",
+    path: `${import.meta.env.BASE_URL}/proxies`,
+    icon: "i-fluent-mdl2-globe"
+  },
+  {
+    title: "Connections",
+    path: `${import.meta.env.BASE_URL}/connections`,
+    icon: "i-fluent-mdl2-plug-connected"
+  },
+  {
+    title: "Logs",
+    path: `${import.meta.env.BASE_URL}/logs`,
+    icon: "i-fluent-mdl2-document-set"
+  },
+  {
+    title: "Settings",
+    path: `${import.meta.env.BASE_URL}/settings`,
+    icon: "i-fluent-mdl2-settings"
+  }
+];
+
+---
+
+<header min-h-16 border-solid border-b border-base sm-px-6 px-4 flex items-center>
+  <a href="/overview" c-black decoration-none>
+    <h1 text-4 font-normal>
+      <span leading-1rem font-200 op-50 block>Meta Dashboard</span>
+      <span leading-1rem text-lg block>{title}</span>
+    </h1>
+  </a>
+  <div flex-auto />
+  <li flex gap-1 items-center>
+    {
+      routes.map(route => (
+        <ul p-0 m-0 rd-1 c-gray-500 transition class={title === route.title ? "c-black! bg-gray-200": "hover:bg-gray-100"}>
+          <a p-2 sm-p-3 block c-inherit flex items-center decoration-none href={route.path}>
+            <div text-lg class={route.icon} />
+            { route.title === title && <span m-l-2 leading-1em hidden sm-block>{route.title}</span> }
+          </a>
+        </ul>
+      ))
+    }
+  </li>
+</header>

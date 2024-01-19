@@ -7,5 +7,6 @@ export default defineConfig({
   integrations: [
     UnoCSS(),
     react()
-  ]
+  ],
+  base: "/ui"
 });
