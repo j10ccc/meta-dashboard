@@ -1,7 +1,7 @@
 ---
 import routes from "@/constants/routes";
 
-const { title } = Astro.props;
+const { title, disableNav = false } = Astro.props;
 ---
 
 <header min-h-16 border-solid border-b border-base sm-px-6 px-4 flex items-center>
@@ -12,16 +12,18 @@ const { title } = Astro.props;
     </h1>
   </a>
   <div flex-auto />
-  <li flex gap-1 items-center>
-    {
-      routes.map(route => (
-        <ul p-0 m-0 rd-1 c-gray-500 transition class={title === route.title ? "c-black! bg-gray-200": "hover:bg-gray-100"}>
-          <a p-2 sm-p-3 block c-inherit flex items-center decoration-none href={route.path}>
-            <div text-lg class={route.icon} />
-            { route.title === title && <span m-l-2 leading-1em hidden sm-block>{route.title}</span> }
-          </a>
-        </ul>
-      ))
-    }
-  </li>
+  {
+    !disableNav && <li flex gap-1 items-center>
+      {
+        routes.map(route => (
+          <ul p-0 m-0 rd-1 c-gray-500 transition class={title === route.title ? "c-black! bg-gray-200": "hover:bg-gray-100"}>
+            <a p-2 sm-p-3 block c-inherit flex items-center decoration-none href={route.path}>
+              <div text-lg class={route.icon} />
+              { route.title === title && <span m-l-2 leading-1em hidden sm-block>{route.title}</span> }
+            </a>
+          </ul>
+        ))
+      }
+    </li>
+  }
 </header>

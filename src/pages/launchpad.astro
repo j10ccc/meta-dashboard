@@ -1,0 +1,12 @@
+---
+import LaunchPadIsland from "@/components/islands/LaunchPad";
+import Navigator from "@/components/layouts/Navigator.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const title = "LaunchPad";
+---
+
+<Layout title={title}>
+  <Navigator disableNav title={title} />
+  <LaunchPadIsland client:load />
+</Layout>
