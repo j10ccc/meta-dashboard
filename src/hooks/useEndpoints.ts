@@ -31,8 +31,11 @@ const useEndpoints = create<EndpointStore>()(
         });
         return newEndpoint;
       },
-      removeEndpoint: id => set(({ endpoints }) => {
-        return { endpoints: endpoints.filter(item => item.id !== id) };
+      removeEndpoint: id => set(({ currentEndpoint, endpoints }) => {
+        return {
+          endpoints: endpoints.filter(item => item.id !== id),
+          currentEndpoint: currentEndpoint?.id === id ? null : currentEndpoint
+        };
       })
     }
     ),

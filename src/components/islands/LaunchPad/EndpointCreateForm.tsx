@@ -19,7 +19,7 @@ const EndpointAppendForm = () => {
       className="w-full"
       onFinish={handleAppendEndpoint}
     >
-      <Input label="Endpoint URL" name="url" placeholder="localhost:9090" />
+      <Input label="Endpoint URL" name="url" placeholder="http://localhost:9090" />
       <Input label="Secret" name="secret" type="password" />
       <div className="flex justify-end">
         <Button type="submit" className="w-20">Create</Button>
