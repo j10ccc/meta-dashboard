@@ -8,28 +8,33 @@ interface IProps {
 
 const TrafficPanel = (props: IProps) => {
   const { endpoint } = props;
-
-  const { currentTraffic, subscribe: subTraffic, unsubscribe: unsubTraffic } = useTrafficRate();
+  const { currentTraffic, subscribe, unsubscribe, connected } = useTrafficRate();
 
   useEffect(() => {
-    subTraffic(endpoint.url);
+    subscribe(endpoint.url);
 
     return () => {
-      unsubTraffic();
+      unsubscribe();
     };
   }, []);
 
   return (
     <div className="grid grid-cols-2 gap-sm">
       <div className="border-base border py-2 px-4">
-        <span className="op-60 text-sm mb-1 block">Upload</span>
-        <span className="text-2xl"> {currentTraffic?.up.value || "-"} </span>
-        <span className="op-50 text-xs">{currentTraffic?.up.unit}</span>
+        <div className="flex gap-1 items-baseline mb-1">
+          <span className="op-60 text-sm">Upload</span>
+          {!connected && <div title="disconnected" className="i-fluent-mdl2-warning-solid c-red-600 text-xs" />}
+        </div>
+        <span className="text-2xl"> {currentTraffic.up.value || "-"} </span>
+        <span className="op-50 text-xs">{currentTraffic.up.unit}</span>
       </div>
       <div className="border-base border py-2 px-4">
-        <span className="op-60 text-sm mb-1 block">Download</span>
-        <span className="text-2xl"> {currentTraffic?.down.value || "-"} </span>
-        <span className="op-50 text-xs">{currentTraffic?.down.unit}</span>
+        <div className="flex gap-1 items-baseline mb-1">
+          <span className="op-60 text-sm">Download</span>
+          {!connected && <div title="disconnected" className="i-fluent-mdl2-warning-solid c-red-600 text-xs" />}
+        </div>
+        <span className="text-2xl"> {currentTraffic.down.value || "-"} </span>
+        <span className="op-50 text-xs">{currentTraffic.down.unit}</span>
       </div>
     </div>
   );

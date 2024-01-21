@@ -1,27 +1,19 @@
-import { useRef, useState } from "react";
+import { useMemo, } from "react";
 import type { RawTrafficRate, TrafficRate } from "@/interfaces/Traffic";
 import { convertRateUnit } from "@/utils/traffic";
+import useWebsocket from "./useWebsocket";
 
 function useTrafficRate() {
-  const [rate, setRate] = useState<TrafficRate>();
-  const socketRef = useRef<WebSocket>();
-
-  function subscribe(endpointURL: string) {
-    const wsURL = endpointURL.replace("http://", "ws://");
-    if (!socketRef.current) {
-      socketRef.current = new WebSocket(`${wsURL}/traffic`);
-      socketRef.current.addEventListener("message", (e) => {
-        const data: RawTrafficRate = JSON.parse(e.data);
-        setRate({ up: convertRateUnit(data.up), down: convertRateUnit(data.down) });
-      });
-    }
-  }
-
-  function unsubscribe() {
-    socketRef.current?.close();
-  }
+  const { data, connected, subscribe, unsubscribe } = useWebsocket<RawTrafficRate>();
+  const rate = useMemo<TrafficRate>(() => {
+    return {
+      up: convertRateUnit(data?.up || 0),
+      down: convertRateUnit(data?.down || 0)
+    };
+  }, [data]);
 
   return {
+    connected,
     currentTraffic: rate,
     subscribe,
     unsubscribe
