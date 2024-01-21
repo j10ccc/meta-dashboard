@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import useEndpoints from "@/hooks/useEndpoints";
 import { validEndpoint } from "@/utils/endpoint";
+import RealtimePanel from "./RealtimePanel";
 
 const Overview = () => {
-  const { currentEndpoint } = useEndpoints();
-
   useEffect(() => {
     useEndpoints.persist.onFinishHydration(({ currentEndpoint }) => {
       validEndpoint(currentEndpoint);
@@ -12,9 +11,9 @@ const Overview = () => {
   }, []);
 
   return (
-    <div>
-      { currentEndpoint?.url }
-    </div>
+    <main className="px-sm">
+      <RealtimePanel />
+    </main>
   );
 };
 
