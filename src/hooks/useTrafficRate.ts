@@ -4,7 +4,7 @@ import { convertRateUnit } from "@/utils/traffic";
 import useWebsocket from "./useWebsocket";
 
 function useTrafficRate() {
-  const { data, connected, subscribe, unsubscribe } = useWebsocket<RawTrafficRate>();
+  const { data, connected, subscribe, unsubscribe } = useWebsocket<RawTrafficRate>("/traffic");
   const rate = useMemo<TrafficRate>(() => {
     return {
       up: convertRateUnit(data?.up || 0),

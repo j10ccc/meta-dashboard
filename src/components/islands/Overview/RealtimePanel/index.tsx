@@ -1,5 +1,6 @@
 import useEndpoints from "@/hooks/useEndpoints";
 import TrafficPanel from "./TrafficPanel";
+import UsagePanel from "./UsagePanel";
 
 const RealtimeInfo = () => {
   const { currentEndpoint } = useEndpoints();
@@ -16,7 +17,10 @@ const RealtimeInfo = () => {
             </a>
           </div>
         </div>
-        {currentEndpoint && <TrafficPanel endpoint={currentEndpoint} />}
+        <div className="flex flex-col gap-sm">
+          {currentEndpoint && <TrafficPanel endpoint={currentEndpoint} />}
+          {currentEndpoint && <UsagePanel endpoint={currentEndpoint} />}
+        </div>
       </div>
     </section>
   );
