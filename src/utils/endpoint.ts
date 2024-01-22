@@ -1,10 +1,11 @@
 import { type Endpoint, EndpointSchema } from "@/interfaces/Endpoint";
+import { parsePath } from "./path";
 
 export function validEndpoint(value: Endpoint | null) {
   try {
     EndpointSchema.parse(value);
   } catch {
-    window.location.replace(`${import.meta.env.BASE_URL}/launchpad`);
+    window.location.replace(parsePath("/launchpad"));
   }
 }
 

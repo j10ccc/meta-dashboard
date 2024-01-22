@@ -8,5 +8,5 @@ export default defineConfig({
     UnoCSS(),
     react()
   ],
-  base: "/ui"
+  base: process.env.BASE
 });

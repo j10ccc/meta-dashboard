@@ -1,6 +1,7 @@
 ---
 import routes from "@/constants/routes";
 import type { RouteTitle } from "@/constants/routes";
+import { parsePath } from "@/utils/path";
 
 const { title, disableNav = false } = Astro.props;
 
@@ -15,7 +16,7 @@ const RouteTitleIconMap: Record<RouteTitle, string> = {
 ---
 
 <header min-h-16 border-solid border-b border-base sm-px-6 px-4 flex items-center>
-  <a href={`${import.meta.env.BASE_URL}/overview`} c-black decoration-none>
+  <a href={parsePath("/overview")} c-black decoration-none>
     <h1 text-4 font-normal>
       <span leading-1rem font-200 op-50 block>Meta Dashboard</span>
       <span leading-1rem text-lg block>{title}</span>

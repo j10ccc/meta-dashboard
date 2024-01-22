@@ -1,3 +1,5 @@
+import { parsePath } from "@/utils/path";
+
 export type RouteTitle = "Overview" | "Proxies" | "Connections" | "Logs" | "Settings";
 
 export type Route = {
@@ -8,23 +10,23 @@ export type Route = {
 const routes: Route[] = [
   {
     title: "Overview",
-    path: `${import.meta.env.BASE_URL}/overview`,
+    path: parsePath("/overview"),
   },
   {
     title: "Proxies",
-    path: `${import.meta.env.BASE_URL}/proxies`,
+    path: parsePath("/proxies"),
   },
   {
     title: "Connections",
-    path: `${import.meta.env.BASE_URL}/connections`,
+    path: parsePath("/connections"),
   },
   {
     title: "Logs",
-    path: `${import.meta.env.BASE_URL}/logs`,
+    path: parsePath("/logs"),
   },
   {
     title: "Settings",
-    path: `${import.meta.env.BASE_URL}/settings`,
+    path: parsePath("/settings"),
   }
 ];
 

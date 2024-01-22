@@ -1,6 +1,7 @@
 import useEndpoints from "@/hooks/useEndpoints";
 import TrafficPanel from "./TrafficPanel";
 import UsagePanel from "./UsagePanel";
+import { parsePath } from "@/utils/path";
 
 const RealtimeInfo = () => {
   const { currentEndpoint } = useEndpoints();
@@ -12,7 +13,7 @@ const RealtimeInfo = () => {
           <span className="op-50 text-xs block">Endpoint</span>
           <div className="flex gap-1 items-center">
             <span className="text-sm">{currentEndpoint?.url}</span>
-            <a href={`${import.meta.env.BASE_URL}/launchpad`} className="c-black op-30">
+            <a href={parsePath("/launchpad")} className="c-black op-30">
               <div className="i-fluent-mdl2-alert-solid text-xs" />
             </a>
           </div>
