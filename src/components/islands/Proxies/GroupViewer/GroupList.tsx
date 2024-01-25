@@ -15,25 +15,25 @@ const GroupList = (props: IProps) => {
   };
 
   return (
-    <div className="w-32 shrink-0">
-      <div className="my-4">
+    <div className="w-32 flex flex-col shrink-0">
+      <div className="my-4 px-sm">
         <span className="op-60 text-sm">Proxy Groups</span>
       </div>
-      <li className="block text-sm">
+      <li className="block text-sm pl-sm of-scroll">
         { groups.map(group => (
           <ul
             className={[
-              "my0 py-2 px-2 border-base border-solid",
+              "my0 py-2 px-2 border-base border-solid cursor-pointer",
               currentGroup === group ? "b-y" : "b-r"
             ].join(" ")}
             key={group.name}
+            onClick={() => handleSelect(group)}
           >
             <span
               className={[
-                "cursor-pointer",
+                "pointer-events-none",
                 currentGroup === group ? "c-black" : "op-30"
               ].join(" ")}
-              onClick={() => handleSelect(group)}
             >
               { group.name }
             </span>

@@ -13,7 +13,7 @@ const GroupViewer = () => {
   }, [groups]);
 
   return (
-    <section className="flex justify-center">
+    <section className="flex justify-center h-full">
       <div className="max-w-screen w-lg flex">
         <GroupList group={currentGroup} setGroup={setCurrentGroup} />
         <GroupDetail nodes={currentGroup?.proxies || []} />

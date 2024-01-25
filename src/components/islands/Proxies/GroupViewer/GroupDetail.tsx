@@ -13,11 +13,11 @@ const GroupDetail = (props: IProps) => {
   }
 
   return (
-    <div className="flex-auto ml-sm">
+    <div className="flex flex-col flex-auto ml-sm">
       <div className="my-4">
         <span className="op-40 text-sm">Proxy Nodes</span>
       </div>
-      <li className="grid text-sm gap-xs sm:grid-cols-2">
+      <li className="grid text-sm gap-xs sm:grid-cols-2 of-y-scroll pr-sm pb-xs">
         {nodes.map(node => (
           <ul
             data-name={node.name}
