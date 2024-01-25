@@ -4,16 +4,16 @@ import useSWR from "swr";
 import type { ProxyGroup } from "@/interfaces/Proxy";
 import useEndpoints from "./useEndpoints";
 
-const fetcher = (url: string) => {
-  return ky(url).json<{providers: Record<string, ProxyGroup>}>();
+const fetcher = (params: [path: string, domain: string]) => {
+  const [path, domain] = params;
+  return ky.get(domain + path).json<{proxies: Record<string, Partial<ProxyGroup>>}>();
 };
 
 const useProxyGroups = () => {
   const { currentEndpoint } = useEndpoints();
   const { data } = useSWR(
-    currentEndpoint && `${currentEndpoint.url}/providers/proxies`,
+    currentEndpoint ? ["/proxies", currentEndpoint?.url]: null,
     fetcher, {
-      // revalidateOnMount: false,
       revalidateOnReconnect: false,
       revalidateIfStale: false,
       revalidateOnFocus: false
@@ -21,11 +21,17 @@ const useProxyGroups = () => {
   );
 
   const groups = useMemo(() => {
-    if (data?.providers) {
-      return Object.values(data.providers);
-    } else {
-      return [];
-    }
+    if (!data?.proxies) return [];
+
+    const sortIndex = [...(data.proxies["GLOBAL"].all ?? []), "GLOBAL"];
+    const groups = Object.values(data.proxies)
+      .filter(proxy => proxy.all?.length) as ProxyGroup[];
+
+    const sortedGroups = groups.sort((a, b) =>
+      sortIndex.indexOf(a.name) - sortIndex.indexOf(b.name)
+    );
+
+    return sortedGroups;
   }, [data]);
 
   return {

@@ -12,7 +12,7 @@ export interface ProxyNode {
 
 enum ProxyNodeType {
   // Note: Change name
-  Group = "Proxy",
+  Proxy = "Proxy",
   Selector = "Selector",
   Trojan = "Trojan"
   // Compatible = "Compatible",
@@ -20,18 +20,33 @@ enum ProxyNodeType {
   // PASS = "PASS",
 }
 
-export interface ProxyGroup {
+export interface ProxyProvider {
   expectedStatus: string;
   name: string;
   proxies: ProxySelector[];
+  subscriptionInfo: {
+    Upload: number;
+    Download: number;
+    Total: number;
+    Expire: number;
+  };
   testUrl: string;
-  type: ProxyNodeType.Group;
+  type: ProxyNodeType.Proxy;
+  updateAt: string;
   vehicleTye: string;
 }
 
+/**
+ * Proxy Selector
+ *
+ * Entity in frontend, aligning with field in meta config
+ */
+export interface ProxyGroup extends ProxySelector {
+}
+
 export interface ProxySelector extends ProxyNode {
-  /** All of name of nodes */
-  all: string;
+  /** All name of nodes */
+  all: string[];
   /** Name of current node */
   now: string;
   type: ProxyNodeType.Selector;
