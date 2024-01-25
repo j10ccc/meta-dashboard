@@ -1,4 +1,5 @@
 ---
+import ProxiesIsland from "@/components/islands/Proxies";
 import Navigator from "@/components/layouts/Navigator.astro";
 import Layout from "@/layouts/Layout.astro";
 
@@ -7,4 +8,5 @@ const name = "Proxies";
 
 <Layout title={name}>
   <Navigator title={name} />
+  <ProxiesIsland client:load />
 </Layout>
