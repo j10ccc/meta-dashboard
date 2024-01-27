@@ -17,8 +17,7 @@ const GroupViewer = () => {
       <div className="max-w-screen w-lg flex">
         <GroupList group={currentGroup} setGroup={setCurrentGroup} />
         <GroupDetail
-          nodes={currentGroup?.all || []}
-          currentNode={currentGroup?.now}
+          group={currentGroup}
           setGroup={setCurrentGroup}
         />
       </div>

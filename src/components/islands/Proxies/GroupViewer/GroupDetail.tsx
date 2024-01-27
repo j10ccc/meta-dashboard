@@ -1,17 +1,18 @@
+import useProxyNodes from "@/hooks/useProxyNodes";
 import type { ProxyGroup } from "@/interfaces/Proxy";
 
 interface IProps {
-  nodes: string[];
-  currentNode: string | undefined;
+  group: ProxyGroup | undefined;
   setGroup: (value: ProxyGroup) => void;
 }
 
 const GroupDetail = (props: IProps) => {
-  const { nodes, currentNode } = props;
+  const { group } = props;
+  const { currentNode, nodes, selectNode } = useProxyNodes(group);
 
   function handleSelect(e: any) {
     const name = e.target.dataset["name"];
-    console.log(name);
+    selectNode(name);
   }
 
   return (
@@ -20,17 +21,17 @@ const GroupDetail = (props: IProps) => {
         <span className="op-40 text-sm">Proxy Nodes</span>
       </div>
       <li className="grid text-sm gap-xs sm:grid-cols-2 of-y-scroll pr-sm pb-xs">
-        {nodes.map(name => (
+        {nodes.map(node => (
           <ul
-            data-name={name}
+            data-name={node}
             className={[
               "m-0 rd-1 py-2 px-sm bg-gray-50 cursor-pointer",
-              currentNode === name ? "font-bold c-gray-800 border-base b-2" : ""
+              currentNode === node ? "font-bold c-gray-800 border-base b-2" : ""
             ].join(" ")}
-            key={name}
+            key={node}
             onClick={handleSelect}
           >
-            <span className="break-all pointer-events-none">{name}</span>
+            <span className="break-all pointer-events-none">{node}</span>
           </ul>
         ))}
       </li>
