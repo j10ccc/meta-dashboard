@@ -1,11 +1,10 @@
-import ky from "ky";
 import { useEffect, useMemo, useState } from "react";
+import { useRequestContext } from "@/components/contexts/RequestContext";
 import type { ProxyGroup } from "@/interfaces/Proxy";
-import useEndpoints from "./useEndpoints";
 
 function useProxyNodes(group: ProxyGroup | undefined) {
   const [current, setCurrent] = useState<string | undefined>(group?.now);
-  const { currentEndpoint } = useEndpoints();
+  const { request } = useRequestContext();
   const nodes = useMemo(() => {
     return group?.all || [];
   }, [group]);
@@ -15,8 +14,8 @@ function useProxyNodes(group: ProxyGroup | undefined) {
   }, [group]);
 
   async function selectNode(name: string) {
-    if (!currentEndpoint?.url || !group?.name) return;
-    await ky.put(currentEndpoint.url + `/proxies/${group.name}`, {
+    if (!request || !group?.name) return;
+    await request.put(`proxies/${group.name}`, {
       body: JSON.stringify({ name })
     }).json<null>();
     setCurrent(name);

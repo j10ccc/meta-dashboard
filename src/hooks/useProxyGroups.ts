@@ -1,19 +1,15 @@
-import ky from "ky";
 import { useMemo } from "react";
 import useSWR from "swr";
+import { useRequestContext } from "@/components/contexts/RequestContext";
 import type { ProxyGroup } from "@/interfaces/Proxy";
-import useEndpoints from "./useEndpoints";
-
-const fetcher = (params: [path: string, domain: string]) => {
-  const [path, domain] = params;
-  return ky.get(domain + path).json<{proxies: Record<string, Partial<ProxyGroup>>}>();
-};
 
 const useProxyGroups = () => {
-  const { currentEndpoint } = useEndpoints();
+  const { request } = useRequestContext();
+
   const { data } = useSWR(
-    currentEndpoint ? ["/proxies", currentEndpoint?.url]: null,
-    fetcher, {
+    request ? "proxies" : null,
+    (path) => request!(path).json<{proxies: Record<string, Partial<ProxyGroup>>}>(),
+    {
       revalidateOnReconnect: false,
       revalidateIfStale: false,
       revalidateOnFocus: false
