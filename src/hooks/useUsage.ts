@@ -5,6 +5,7 @@ import useWebsocket from "./useWebsocket";
 
 function useUsage() {
   const { data, connected, subscribe, unsubscribe } = useWebsocket<RawUsage>("/connections");
+  console.log("");
   const usage = useMemo<Usage>(() => {
     return {
       uploadTotal: convertRateUnit(data?.uploadTotal || 0),
