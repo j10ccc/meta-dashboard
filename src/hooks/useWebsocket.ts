@@ -4,17 +4,19 @@ function useWebsocket<DataType>(path: string, timeout = 5000) {
   const socketRef = useRef<WebSocket>();
   const [data, setData] = useState<DataType>();
   const [connected, setConnected] = useState(false);
-  const timer = useRef<number>(0);
+  const urlCache = useRef<string>();
+  const timer = useRef<number>(0); // Record whether socket is disconnected
 
   function resetTimer() {
-    clearTimeout(timer.current);
+    clearInterval(timer.current);
 
-    timer.current = setTimeout(() => {
-      unsubscribe();
+    timer.current = setInterval(() => {
+      reconnect();
     }, timeout);
   }
 
   function subscribe(endpointURL: string) {
+    urlCache.current = endpointURL;
     const wsURL = endpointURL.replace("http://", "ws://");
 
     if (!socketRef.current) {
@@ -24,13 +26,21 @@ function useWebsocket<DataType>(path: string, timeout = 5000) {
         resetTimer();
       });
       socketRef.current.addEventListener("message", (e) => {
+        setConnected(true);
         setData(JSON.parse(e.data));
         resetTimer();
       });
     }
   }
 
+  function reconnect() {
+    setConnected(false);
+    if (!urlCache.current) return;
+    subscribe(urlCache.current);
+  }
+
   function unsubscribe() {
+    clearInterval(timer.current);
     socketRef.current?.close();
     setConnected(false);
   }
@@ -39,7 +49,8 @@ function useWebsocket<DataType>(path: string, timeout = 5000) {
     data,
     subscribe,
     unsubscribe,
-    connected
+    connected,
+
   };
 }
 
