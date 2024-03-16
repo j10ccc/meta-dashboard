@@ -8,10 +8,10 @@ interface IProps {
 
 const UsagePanel = (props: IProps) => {
   const { endpoint } = props;
-  const { currentUsage, subscribe, unsubscribe, connected } = useUsage();
+  const { currentUsage, subscribe, unsubscribe, connected } = useUsage(endpoint.url);
 
   useEffect(() => {
-    subscribe(endpoint.url);
+    subscribe();
 
     return () => {
       unsubscribe();

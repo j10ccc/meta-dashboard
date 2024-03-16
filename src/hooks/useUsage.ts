@@ -3,15 +3,18 @@ import type { RawUsage, Usage } from "@/interfaces/Traffic";
 import { convertRateUnit } from "@/utils/traffic";
 import useWebsocket from "./useWebsocket";
 
-function useUsage() {
-  const { data, connected, subscribe, unsubscribe } = useWebsocket<RawUsage>("/connections");
-  console.log("");
+function useUsage(endpointURL: string) {
+  const { data, connected, subscribe: _subscribe, unsubscribe } = useWebsocket<RawUsage>("/connections");
   const usage = useMemo<Usage>(() => {
     return {
       uploadTotal: convertRateUnit(data?.uploadTotal || 0),
       downloadTotal: convertRateUnit(data?.downloadTotal || 0)
     };
   }, [data]);
+
+  function subscribe() {
+    _subscribe(endpointURL);
+  }
 
   return {
     connected,

@@ -8,10 +8,10 @@ interface IProps {
 
 const TrafficPanel = (props: IProps) => {
   const { endpoint } = props;
-  const { currentTraffic, subscribe, unsubscribe, connected } = useTrafficRate();
+  const { currentTraffic, subscribe, unsubscribe, connected } = useTrafficRate(endpoint.url);
 
   useEffect(() => {
-    subscribe(endpoint.url);
+    subscribe();
 
     return () => {
       unsubscribe();
