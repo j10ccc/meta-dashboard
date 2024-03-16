@@ -25,8 +25,8 @@ const GroupDetail = (props: IProps) => {
           <ul
             data-name={node}
             className={[
-              "m-0 rd-1 py-2 px-sm bg-gray-50 cursor-pointer",
-              currentNode === node ? "font-bold c-gray-800 border-base b-2" : ""
+              "m-0 rd-1 py-2 px-sm bg-gray-50 cursor-pointer box-content",
+              currentNode === node ? "font-bold c-gray-800 bg-gray-200!" : ""
             ].join(" ")}
             key={node}
             onClick={handleSelect}
