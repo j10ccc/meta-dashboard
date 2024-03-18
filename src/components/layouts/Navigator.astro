@@ -23,18 +23,16 @@ const RouteTitleIconMap: Record<RouteTitle, string> = {
     </h1>
   </a>
   <div flex-auto />
-  {
-    !disableNav && <li flex gap-1 items-center>
-      {
-        routes.map(route => (
-          <ul p-0 m-0 rd-1 c-gray-500 transition class={title === route.title ? "c-black! bg-gray-200": "hover:bg-gray-100"}>
-            <a p-2 sm-p-3 block c-inherit flex items-center decoration-none href={route.path}>
-              <div text-lg class={RouteTitleIconMap[route.title]} />
-              { route.title === title && <span m-l-2 leading-1em hidden sm-block>{route.title}</span> }
-            </a>
-          </ul>
-        ))
-      }
-    </li>
+  { !disableNav && <nav flex gap-1 items-center>
+    {
+      routes.map(route => (
+        <div p-0 m-0 rd-1 c-gray-500 transition class={title === route.title ? "c-black! bg-gray-200": "hover:bg-gray-100"}>
+          <a p-2 block c-inherit flex items-center decoration-none href={route.path}>
+            <div class={RouteTitleIconMap[route.title]} />
+            { route.title === title && <span text-sm m-l-2 leading-1em hidden sm-block>{route.title}</span> }
+          </a>
+        </div>
+      ))
+    } </nav>
   }
 </header>
