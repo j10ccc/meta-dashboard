@@ -12,26 +12,26 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
-    "@astrojs/check": "^0.5.8",
-    "@astrojs/react": "^3.1.0",
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/react": "^3.1.1",
     "@iconify-json/svg-spinners": "^1.1.2",
-    "astro": "^4.5.2",
+    "astro": "^4.5.18",
     "idb-keyval": "^6.2.1",
-    "ky": "^1.2.0",
-    "nanoid": "^5.0.4",
+    "ky": "^1.2.4",
+    "nanoid": "^5.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swr": "^2.2.4",
+    "swr": "^2.2.5",
     "typescript": "^5.3.3",
-    "zod": "^3.22.4",
+    "zod": "^3.22.5",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
-    "@iconify-json/fluent-mdl2": "^1.1.6",
+    "@iconify-json/fluent-mdl2": "^1.1.7",
     "@j10c/eslint-config": "^0.4.0",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "eslint": "^8.56.0",
-    "unocss": "^0.58.3"
+    "unocss": "^0.58.9"
   }
 }
