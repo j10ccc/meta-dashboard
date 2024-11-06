@@ -10,7 +10,7 @@ function useProxyNodes(group: ProxyGroup | undefined) {
   }, [group]);
 
   useEffect(() => {
-    group && setCurrent(group.now);
+    if (group) setCurrent(group.now);
   }, [group]);
 
   async function selectNode(name: string) {

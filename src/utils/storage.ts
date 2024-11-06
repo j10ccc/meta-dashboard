@@ -10,7 +10,7 @@ const IDBStorage: StateStorage = {
   },
   removeItem: async (name: string): Promise<void> => {
     await del(name);
-  },
+  }
 };
 
 export {

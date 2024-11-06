@@ -1,4 +1,4 @@
-import { useMemo, } from "react";
+import { useMemo } from "react";
 import type { RawTrafficRate, TrafficRate } from "@/interfaces/Traffic";
 import { convertRateUnit } from "@/utils/traffic";
 import useWebsocket from "./useWebsocket";

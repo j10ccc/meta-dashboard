@@ -19,6 +19,7 @@ const Button = (props: ButtonProps) => {
 
   return (
     <button
+      type="button"
       className={
         [
           "bg-transparent px-4 py-2 hover:bg-gray-100 transition",

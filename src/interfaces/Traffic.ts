@@ -34,7 +34,7 @@ export const UsageSchema = z.object({
   downloadTotal: ValueWithUnitSchema
 });
 
-export interface RawTrafficRate extends z.infer<typeof RawTrafficRateSchema> { }
-export interface TrafficRate extends z.infer<typeof TrafficRateSchema> { }
-export interface RawUsage extends z.infer<typeof RawUsageSchema> { }
-export interface Usage extends z.infer<typeof UsageSchema> { }
+export type RawTrafficRate = z.infer<typeof RawTrafficRateSchema>;
+export type TrafficRate = z.infer<typeof TrafficRateSchema>;
+export type RawUsage = z.infer<typeof RawUsageSchema>;
+export type Usage = z.infer<typeof UsageSchema>;

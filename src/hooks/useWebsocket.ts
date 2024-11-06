@@ -49,7 +49,7 @@ function useWebsocket<DataType>(path: string, timeout = 5000) {
     data,
     subscribe,
     unsubscribe,
-    connected,
+    connected
 
   };
 }

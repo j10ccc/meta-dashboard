@@ -8,7 +8,7 @@ const useProxyGroups = () => {
 
   const { data } = useSWR(
     request ? "proxies" : null,
-    (path) => request!(path).json<{proxies: Record<string, Partial<ProxyGroup>>}>(),
+    (path) => request!(path).json<{ proxies: Record<string, Partial<ProxyGroup>> }>(),
     {
       revalidateOnReconnect: false,
       revalidateIfStale: false,
@@ -31,7 +31,7 @@ const useProxyGroups = () => {
   }, [data]);
 
   return {
-    groups,
+    groups
   };
 };
 

@@ -1,4 +1,4 @@
-type ValidPath = `/${string}`
+type ValidPath = `/${string}`;
 
 export function parsePath(path: ValidPath) {
   const base = import.meta.env.BASE_URL;

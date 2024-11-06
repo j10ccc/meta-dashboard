@@ -5,28 +5,28 @@ export type RouteTitle = "Overview" | "Proxies" | "Connections" | "Logs" | "Sett
 export type Route = {
   title: RouteTitle;
   path: string;
-}
+};
 
 const routes: Route[] = [
   {
     title: "Overview",
-    path: parsePath("/overview"),
+    path: parsePath("/overview")
   },
   {
     title: "Proxies",
-    path: parsePath("/proxies"),
+    path: parsePath("/proxies")
   },
   {
     title: "Connections",
-    path: parsePath("/connections"),
+    path: parsePath("/connections")
   },
   {
     title: "Logs",
-    path: parsePath("/logs"),
+    path: parsePath("/logs")
   },
   {
     title: "Settings",
-    path: parsePath("/settings"),
+    path: parsePath("/settings")
   }
 ];
 

@@ -41,8 +41,7 @@ export interface ProxyProvider {
  *
  * Entity in frontend, aligning with field in meta config
  */
-export interface ProxyGroup extends ProxySelector {
-}
+export type ProxyGroup = ProxySelector;
 
 export interface ProxySelector extends ProxyNode {
   /** All name of nodes */
